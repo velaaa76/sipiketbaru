@@ -36,7 +36,7 @@
             <a href="#home">Home</a>
             <a href="#fitur">Fitur</a>
             <a href="#developer">Developer</a>
-            <a href="user/login.php" class="login-btn">
+            <a href="user/loginbaru.php" class="login-btn">
                 Login
             </a>
         </nav>
@@ -62,7 +62,7 @@
 
             <div class="hero-button">
 
-                <a href="user/login.php" class="btn-primary">
+                <a href="user/loginbaru.php" class="btn-primary">
                     Mulai Sekarang
                 </a>
 

@@ -1,210 +1,201 @@
 <?php
 session_start();
-if(!isset($_SESSION['username'])){
-    header("Location: login.php");
+include '../include/koneksi.php';
+
+if (!isset($_SESSION['id_user'])) {
+    header("Location: ../login/login.php");
     exit;
 }
 
-include '../include/koneksi.php';
+$id_user = $_SESSION['id_user'];
 
-$username = $_SESSION['username'];
-$query = $conn->query("SELECT * FROM users WHERE nama='$username'");
-$data = $query->fetch_assoc();
+$query = mysqli_query($conn, "
+    SELECT * FROM users
+    WHERE id_user = '$id_user'
+");
+
+$data = mysqli_fetch_array($query);
+
+$nama  = $data['nama'];
+$email = $data['email'];
+$role  = $data['role'];
+$foto  = $data['foto'];
 ?>
 
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Profil - SiPiket</title>
 
-<style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', sans-serif;
-}
+    <meta charset="UTF-8">
 
-body {
-    background: #f5f5f5;
-    display: flex;
-    justify-content: center;
-}
+    <meta name="viewport"
+    content="width=device-width, initial-scale=1.0">
 
-/* CONTAINER */
-.container {
-    width: 100%;
-    max-width: 420px;
-    padding: 20px;
-}
+    <title>Profile | SiPiket</title>
 
-/* HEADER */
-.header {
-    text-align: center;
-    margin-top: 30px;
-}
+    <!-- CSS -->
+    <link rel="stylesheet"
+    href="../css/profile.css">
 
-/* AVATAR */
-.avatar {
-    width: 90px;
-    height: 90px;
-    background: #e60000;
-    color: white;
-    border-radius: 20px;
-    margin: auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 32px;
-    font-weight: bold;
-    box-shadow: 0 8px 20px rgba(230,0,0,0.3);
-}
+    <!-- FONT -->
+    <link rel="preconnect"
+    href="https://fonts.googleapis.com">
 
-/* NAMA */
-.name {
-    margin-top: 15px;
-    font-size: 22px;
-    font-weight: bold;
-    color: #222;
-}
+    <link rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin>
 
-.role {
-    font-size: 14px;
-    color: #777;
-}
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
 
-/* MENU */
-.menu {
-    margin-top: 30px;
-}
+    <!-- ICON -->
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-/* ITEM */
-.menu-item {
-    background: #fff;
-    padding: 15px;
-    border-radius: 12px;
-    margin-bottom: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
-    transition: 0.2s;
-}
-
-.menu-item:hover {
-    transform: translateY(-2px);
-}
-
-/* LEFT */
-.left {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-/* ICON */
-.icon {
-    width: 40px;
-    height: 40px;
-    background: #f2f2f2;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-}
-
-/* TEXT */
-.text {
-    font-size: 15px;
-    color: #333;
-}
-
-/* LOGOUT */
-.logout {
-    margin-top: 25px;
-}
-
-.logout button {
-    width: 100%;
-    padding: 15px;
-    border: none;
-    border-radius: 12px;
-    background: #e60000;
-    color: white;
-    font-weight: bold;
-    font-size: 15px;
-    cursor: pointer;
-    box-shadow: 0 5px 15px rgba(230,0,0,0.3);
-}
-
-/* FOOTER */
-.footer {
-    text-align: center;
-    font-size: 12px;
-    color: #aaa;
-    margin-top: 15px;
-}
-</style>
 </head>
 
 <body>
 
-<div class="container">
+    <!-- BACKGROUND -->
+    <div class="blur blur1"></div>
+    <div class="blur blur2"></div>
 
-    <!-- HEADER -->
-    <div class="header">
-        <div class="avatar">
-            <?php echo strtoupper(substr($data['nama'],0,2)); ?>
-        </div>
 
-        <div class="name"><?php echo $data['nama']; ?></div>
-        <div class="role">Siswa Kelas X SIJA 2</div>
-    </div>
 
-    <!-- MENU -->
-    <div class="menu">
+    <div class="container">
 
-        <div class="menu-item">
-            <div class="left">
-                <div class="icon">👤</div>
-                <div class="text">Profil Saya</div>
+        <!-- SIDEBAR -->
+        <div class="sidebar">
+
+            <div class="logo">
+
+                <i class="fa-solid fa-shield-heart"></i>
+
+                <h2>SiPiket</h2>
+
             </div>
-            <div>›</div>
-        </div>
 
-        <div class="menu-item">
-            <div class="left">
-                <div class="icon">🔒</div>
-                <div class="text">Keamanan</div>
+
+
+            <div class="menu">
+
+                <a href="#">
+
+                    <i class="fa-solid fa-house"></i>
+
+                    Dashboard
+
+                </a>
+
+                <a href="#">
+
+                    <i class="fa-solid fa-list-check"></i>
+
+                    Tugas
+
+                </a>
+
+                <a href="#">
+
+                    <i class="fa-solid fa-calendar"></i>
+
+                    Jadwal
+
+                </a>
+
+                <a href="#" class="active">
+
+                    <i class="fa-solid fa-user"></i>
+
+                    Profile
+
+                </a>
+
             </div>
-            <div>›</div>
+
         </div>
 
-        <div class="menu-item">
-            <div class="left">
-                <div class="icon">❓</div>
-                <div class="text">Bantuan</div>
+
+
+        <!-- CONTENT -->
+        <div class="content">
+
+            <div class="topbar">
+
+                <h1>Profile Saya</h1>
+
             </div>
-            <div>›</div>
+
+
+
+            <div class="profile-card">
+
+                <!-- FOTO -->
+                <div class="profile-image">
+
+                    <img
+                    src="../img/foto-sipiket.jpeg"
+                    alt="Profile">
+
+                </div>
+
+
+
+                <!-- INFO -->
+                <div class="profile-info">
+
+                    <h2>
+                        <?= $nama; ?>
+                    </h2>
+
+                    <p class="role">
+                        <?= $role; ?>
+                    </p>
+
+
+
+                    <div class="info-box">
+
+                        <div class="item">
+
+                            <span>Email</span>
+
+                            <h4>
+                                <?= $email; ?>
+                            </h4>
+
+                        </div>
+
+
+
+                        <div class="item">
+
+                            <span>Status</span>
+
+                            <h4>Aktif</h4>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <button>
+
+                        <i class="fa-solid fa-pen"></i>
+
+                        Edit Profile
+
+                    </button>
+
+                </div>
+
+            </div>
+
         </div>
 
     </div>
-
-    <!-- LOGOUT -->
-    <div class="logout">
-        <form action="../logout.php" method="POST">
-            <button>Keluar Aplikasi</button>
-        </form>
-    </div>
-
-    <div class="footer">
-        v1.0 Aplikasi SiPiket
-    </div>
-
-</div>
 
 </body>
 </html>
