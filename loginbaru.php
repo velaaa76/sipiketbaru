@@ -1,10 +1,11 @@
 <?php
 session_start();
-include '../include/koneksi.php';
+include 'include/koneksi.php';
 
 if ($_POST) {
     $email = $_POST['email'];
     $password = $_POST['password'];
+    $role = $_POST['user'];
 
     $result = mysqli_query($conn, "SELECT * FROM users WHERE email='$email' AND password='$password'");
 
@@ -28,7 +29,7 @@ if ($_POST) {
     <title>Login | SiPiket</title>
 
     <!-- CSS -->
-    <link rel="stylesheet" href="../css/loginbaru.css">
+    <link rel="stylesheet" href="css/loginbaru.css">
 
     <!-- GOOGLE FONT -->
     <link rel="preconnect" href="https://fonts.googleapis.com">

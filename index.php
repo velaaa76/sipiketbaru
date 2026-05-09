@@ -36,7 +36,7 @@
             <a href="#home">Home</a>
             <a href="#fitur">Fitur</a>
             <a href="#developer">Developer</a>
-            <a href="user/loginbaru.php" class="login-btn">
+            <a href="loginbaru.php" class="login-btn">
                 Login
             </a>
         </nav>

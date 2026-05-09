@@ -1,5 +1,5 @@
 <?php
-include '../include/koneksi.php';
+include 'include/koneksi.php';
 
 if(isset($_POST['register'])) {
     $nama     = $_POST['nama'];
@@ -36,7 +36,7 @@ if(isset($_POST['register'])) {
     <title>Register | SiPiket</title>
 
     <!-- CSS -->
-    <link rel="stylesheet" href="../css/registerbaru.css">
+    <link rel="stylesheet" href="css/registerbaru.css">
 
     <!-- GOOGLE FONT -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
