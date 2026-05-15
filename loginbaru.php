@@ -13,7 +13,7 @@ if ($_POST) {
         $user = mysqli_fetch_assoc($result);
         $_SESSION['username'] = $user['nama'];
 
-        header("Location: dashboard.php");
+        header("Location: dashboard-user/index.php");
         exit;
     }
 

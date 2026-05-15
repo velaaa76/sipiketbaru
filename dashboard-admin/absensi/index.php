@@ -1,5 +1,5 @@
 <?php
-include '../../koneksi.php';
+include '../../include/koneksi.php';
 
 // Mengambil data absensi beserta nama user
 $query_absensi = mysqli_query($conn, "

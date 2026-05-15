@@ -1,5 +1,5 @@
 <?php
-include '../../koneksi.php';
+include '../../include/koneksi.php';
 
 if(isset($_POST['submit'])) {
     $id_user = $_POST['id_user'];
