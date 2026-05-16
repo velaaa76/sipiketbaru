@@ -24,94 +24,70 @@ $users = mysqli_query($conn, "SELECT * FROM users");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tambah Absensi - SiPiket Admin</title>
-    <!-- Import Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary: #e63946;
-            --primary-dark: #d62828;
-            --text-main: #1d3557;
-            --text-muted: #457b9d;
-            --bg-color: #f8f9fa;
-            --white: #ffffff;
-            --shadow-md: 0 10px 20px rgba(0, 0, 0, 0.08);
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-        body { background-color: var(--bg-color); color: var(--text-main); display: flex; min-height: 100vh; }
-
-        /* Sidebar */
-        .sidebar { width: 250px; background: var(--white); box-shadow: var(--shadow-md); padding: 20px; display: flex; flex-direction: column; }
-        .sidebar-logo { font-size: 24px; font-weight: 700; color: var(--primary); margin-bottom: 40px; text-align: center; }
-        .sidebar-menu { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-        .sidebar-menu a { text-decoration: none; color: var(--text-muted); font-weight: 500; padding: 12px 15px; border-radius: 8px; transition: all 0.3s ease; display: block; }
-        .sidebar-menu a:hover, .sidebar-menu a.active { background: rgba(230, 57, 70, 0.1); color: var(--primary); }
-
-        /* Main Content */
-        .main-content { flex: 1; padding: 30px; overflow-y: auto; }
-        .header { margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid rgba(0,0,0,0.05); }
-        .header h1 { font-size: 28px; font-weight: 600; }
-
-        /* Form */
-        .form-section { background: var(--white); padding: 30px; border-radius: 15px; box-shadow: var(--shadow-md); max-width: 600px; }
-        .form-group { margin-bottom: 20px; }
-        .form-group label { display: block; margin-bottom: 8px; font-weight: 500; color: var(--text-main); }
-        .form-group input, .form-group select { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; outline: none; transition: border 0.3s; }
-        .form-group input:focus, .form-group select:focus { border-color: var(--primary); }
-        .btn-submit { background: var(--primary); color: white; padding: 12px 24px; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; transition: background 0.3s; }
-        .btn-submit:hover { background: var(--primary-dark); }
-        .btn-back { display: inline-block; margin-bottom: 20px; color: var(--text-muted); text-decoration: none; font-weight: 500; }
-        .btn-back:hover { color: var(--primary); }
-
-        @media (max-width: 768px) { body { flex-direction: column; } .sidebar { width: 100%; padding: 15px; } }
-    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
+
     <div class="sidebar">
-        <div class="sidebar-logo">SiPiket Admin</div>
+        <div class="sidebar-logo">
+            <i class="fa-solid fa-shield-heart"></i>
+            SiPiket
+        </div>
         <ul class="sidebar-menu">
-            <li><a href="../index.php">Dashboard</a></li>
-            <li><a href="../jadwal/read.php">Jadwal Piket</a></li>
-            <li><a href="#">Data Users</a></li>
-            <li><a href="index.php" class="active">Data Absensi</a></li>
-            <li><a href="#">Data Laporan</a></li>
-            <li style="margin-top: auto;"><a href="../../index.php" style="color: var(--primary);">Logout</a></li>
+            <li><a href="../index.php"><i class="fa-solid fa-chart-pie"></i> Dashboard</a></li>
+            <li><a href="../jadwal/index.php"><i class="fa-regular fa-calendar-check"></i> Jadwal Piket</a></li>
+            <li><a href="#"><i class="fa-solid fa-users"></i> Data Users</a></li>
+            <li><a href="index.php" class="active"><i class="fa-solid fa-clipboard-user"></i> Data Absensi</a></li>
+            <li><a href="#"><i class="fa-solid fa-file-lines"></i> Data Laporan</a></li>
+            <li class="logout-link"><a href="../../index.php"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a></li>
         </ul>
     </div>
+
     <div class="main-content">
-        <a href="index.php" class="btn-back">← Kembali</a>
-        <div class="header">
-            <h1>Tambah Data Absensi</h1>
-        </div>
-        <div class="form-section">
+        <a href="index.php" style="text-decoration: none; color: var(--maroon-vibrant); font-weight: 600; display: inline-block; margin-bottom: 20px;">
+            <i class="fa-solid fa-arrow-left"></i> Kembali ke Daftar
+        </a>
+
+        <div class="form-section" style="max-width: 600px; margin: 0 auto;">
+            <div class="header" style="margin-bottom: 25px;">
+                <h1 style="font-weight: 700; font-size: 24px; color: var(--text-main);">Tambah Data Absensi</h1>
+                <p style="color: var(--text-muted); font-size: 14px;">Masukkan data kehadiran baru untuk anggota piket.</p>
+            </div>
+
             <form method="POST">
                 <div class="form-group">
-                    <label>Pilih User</label>
-                    <select name="id_user" required>
-                        <option value="">-- Pilih User --</option>
+                    <label>Pilih Anggota Piket</label>
+                    <select name="id_user" class="form-control" required>
+                        <option value="">-- Pilih Anggota --</option>
                         <?php while($row = mysqli_fetch_assoc($users)): ?>
                             <option value="<?= $row['user_id'] ?>"><?= htmlspecialchars($row['nama']) ?></option>
                         <?php endwhile; ?>
                     </select>
                 </div>
+
                 <div class="form-group">
                     <label>Tanggal & Waktu</label>
-                    <input type="datetime-local" name="tanggal_dan_waktu" required>
+                    <input type="datetime-local" name="tanggal_dan_waktu" class="form-control" required>
                 </div>
+
                 <div class="form-group">
                     <label>Status Absensi</label>
-                    <select name="status_absensi" required>
+                    <select name="status_absensi" class="form-control" required>
                         <option value="">-- Pilih Status --</option>
                         <option value="hadir">Hadir</option>
                         <option value="izin">Izin</option>
                         <option value="absen">Absen</option>
                     </select>
                 </div>
-                <button type="submit" name="submit" class="btn-submit">Simpan Data</button>
+
+                <button type="submit" name="submit" class="btn-main" style="width: 100%; margin-top: 10px;">
+                    <i class="fa-solid fa-plus"></i> Simpan Data Absensi
+                </button>
             </form>
         </div>
     </div>
+
 </body>
 </html>
